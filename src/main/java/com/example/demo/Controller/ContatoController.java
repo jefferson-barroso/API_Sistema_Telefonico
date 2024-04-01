@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -32,7 +34,7 @@ public class ContatoController {
     	
     }
 	
-	 @GetMapping("/tipo/{tipoContato}")
+	@GetMapping("/tipo/{tipoContato}")
 	    public List<Contato> getContatosByTipo(@PathVariable TipoContato tipoContato) {
 	        return contatoRepository.findByTipoContato(tipoContato);
 	    }
@@ -42,6 +44,17 @@ public class ContatoController {
     public Contato adicionar(@RequestBody Contato contato) {
         return  contatoRepository.save(contato);
     }
+	
+	  @DeleteMapping("/{Id}")
+	    public ResponseEntity<Void> excluir(@PathVariable Long Id) {
+		   if (!contatoRepository.existsById(Id)) {
+	            return ResponseEntity.notFound().build();
+	        }
+       
+		  contatoRepository.deleteById(Id);
+		  
+		  return ResponseEntity.noContent().build();
+	    }
 	
 
 }
