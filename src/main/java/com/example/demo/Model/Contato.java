@@ -1,6 +1,8 @@
 package com.example.demo.Model;
 
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 import com.example.demo.enums.TipoContato;
 
@@ -11,6 +13,7 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -41,95 +44,65 @@ public class Contato {
 	@Enumerated(EnumType.STRING)
 	private TipoContato tipoContato; 
 	
+	 @ManyToMany
+	  private Set<Grupo> grupos = new HashSet<>();
 	
 	public Contato() {
 		
 	}
-	
-
-
-
-	public Contato(Long id, @NotBlank @Size(max = 60) String nome, @Email String email,
-			@NotBlank @Pattern(regexp = "[0-9]{10,11}") String numero, @NotBlank TipoContato tipoContato) {
-		this.id = id;
-		this.nome = nome;
-		this.email = email;
-		this.numero = numero;
-		this.tipoContato = tipoContato;
-	}
-
-
-
 
 	public Long getId() {
 		return id;
 	}
 
-
-
-
 	public void setId(Long id) {
 		this.id = id;
 	}
-
-
-
 
 	public String getNome() {
 		return nome;
 	}
 
-
-
-
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-
-
-
 
 	public String getEmail() {
 		return email;
 	}
 
-
-
-
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
-
-
 
 	public String getNumero() {
 		return numero;
 	}
 
-
-
-
 	public void setNumero(String numero) {
 		this.numero = numero;
 	}
-
-
-
 
 	public TipoContato getTipoContato() {
 		return tipoContato;
 	}
 
-
-
-
 	public void setTipoContato(TipoContato tipoContato) {
 		this.tipoContato = tipoContato;
 	}
 
+	public Set<Grupo> getGrupos() {
+		return grupos;
+	}
 
+	public void setGrupos(Set<Grupo> grupos) {
+		this.grupos = grupos;
+	}
 
+	@Override
+	public int hashCode() {
+		return Objects.hash(id);
+	}
 
 	@Override
 	public boolean equals(Object obj) {
@@ -144,8 +117,13 @@ public class Contato {
 	}
 	
 	
+
+
+	}
 	
 	
 	
 	
-}
+	
+	
+

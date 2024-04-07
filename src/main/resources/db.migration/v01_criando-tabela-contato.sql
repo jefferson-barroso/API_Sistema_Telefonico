@@ -7,3 +7,4 @@ CREATE TABLE CONTATO (
     tipo_contato ENUM('RESIDENCIAL' /* 0 */, 'TRABALHO' /* 1 */, 'FAMILIA' /* 2 */, 'PERSONALIZADO' /* 3 */) NOT NULL,
     PRIMARY KEY (id)
 );
+grupo
